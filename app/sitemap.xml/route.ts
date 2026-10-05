@@ -1,0 +1,3 @@
+import {publishedProjects,SITE_ORIGIN,publicationUrl,escapeXml} from '../../lib/publication';
+export const dynamic='force-dynamic';
+export async function GET(){try{const list=await publishedProjects();return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${SITE_ORIGIN}/</loc></url>${list.map(p=>`<url><loc>${escapeXml(publicationUrl(p))}</loc><lastmod>${escapeXml(p.updatedAt)}</lastmod></url>`).join('')}</urlset>`,{headers:{'Content-Type':'application/xml; charset=utf-8','Cache-Control':'public,max-age=60'}});}catch{return new Response('사이트맵을 불러오지 못했습니다.',{status:503});}}

@@ -1,0 +1,3 @@
+'use client';
+import {useEffect,useState} from 'react';
+export default function PublicAccountLink(){const [email,setEmail]=useState('');useEffect(()=>{const read=()=>{try{const s=JSON.parse(localStorage.getItem('hub3_session')||'null');setEmail(s?.email&&s?.refreshToken?s.email:'');}catch{setEmail('');}};read();window.addEventListener('storage',read);window.addEventListener('focus',read);return()=>{window.removeEventListener('storage',read);window.removeEventListener('focus',read);};},[]);return <a className="dark" href="/studio" title={email||undefined}>{email?'로그인됨 · 제작 작업실':'제작 작업실 · 로그인'}</a>;}
