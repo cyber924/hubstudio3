@@ -1,0 +1,2 @@
+export function siteOrigin(env:Record<string,string|undefined>=process.env){const explicit=env.SITE_URL?.trim(),candidate=explicit&&!explicit.includes('your-project.vercel.app')?explicit:env.VERCEL_PROJECT_PRODUCTION_URL||env.VERCEL_URL||'https://hub-studio3.herestay-4226.chatgpt.site';const url=new URL(candidate.includes('://')?candidate:'https://'+candidate);if(!['https:','http:'].includes(url.protocol))throw new Error('SITE_URL은 HTTP 또는 HTTPS 주소여야 합니다.');return url.origin;}
+export const SITE_ORIGIN=siteOrigin();

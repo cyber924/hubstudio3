@@ -125,3 +125,11 @@ Cron은 비밀 키가 맞는 요청만 실행합니다. 브라우저에서 Cron 
 - https://vercel.com/docs/cron-jobs/manage-cron-jobs
 - https://firebase.google.com/docs/firestore/use-rest-api
 - https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition
+
+## 구글·네이버 검색 최적화
+
+공개 목록과 상세 본문·내부 링크는 서버 HTML에 포함됩니다. 글별 canonical과 sitemap/RSS가 동일한 대표 도메인을 사용합니다. `SITE_URL`을 지정하면 우선 사용하며, 미설정 시 Vercel Production 도메인 시스템 변수를 사용합니다. 커스텀 도메인을 연결한 경우 `SITE_URL`을 그 주소로 설정하고 재배포하세요.
+
+목록 2페이지 이후는 자기 페이지 주소를 canonical로 사용합니다. 분야 필터 화면은 중복 색인을 줄이기 위해 noindex/follow 처리하고, 개별 공개 콘텐츠는 색인을 허용합니다. 존재하지 않는 글이나 목록 페이지는 404이며, 일시적인 DB 오류를 삭제된 글로 처리하지 않습니다. 기사·전자책·SNS에 맞는 구조화 데이터와 공유 이미지 메타데이터를 제공합니다.
+
+Google Search Console과 네이버 서치어드바이저에서 실제 도메인의 소유권을 확인하세요. 발급받은 확인 코드만 `GOOGLE_SITE_VERIFICATION`, `NAVER_SITE_VERIFICATION`에 입력하고 재배포합니다. 사이트맵은 `/sitemap.xml`, RSS는 `/rss.xml`을 제출합니다. 이것은 수집·색인을 돕는 기술적 설정이며 검색 등록이나 순위 상승을 보장하지 않습니다.
