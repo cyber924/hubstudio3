@@ -1,0 +1,1 @@
+{"framework":"nextjs","buildCommand":"npm run build","crons":[{"path":"/api/cron/prepare","schedule":"40 23 * * *"},{"path":"/api/cron/publish","schedule":"*/5 0-1 * * *"}]}
