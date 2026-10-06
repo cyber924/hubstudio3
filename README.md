@@ -40,7 +40,7 @@ Next.js 표준 Node 런타임입니다. Vinext/Vite/Cloudflare Workers 설정은
 1. 새 GitHub 저장소를 만들고 압축을 푼 **폴더 안의 파일**을 올립니다. 저장소 최상단에 `package.json`, `package-lock.json`, `app/`, `lib/`, `public/`, `vercel.json`이 있어야 합니다. ZIP 파일 자체를 올리지 마세요. `node_modules`, `.next`, 실제 `.env.local`, 서비스 계정 JSON은 업로드하지 않습니다.
 2. Vercel → Add New → Project → GitHub 저장소 선택. Framework **Next.js**, Node **22.x**, Install `npm ci`, Build `npm run build`. Output Directory는 기본값. 파일이 하위 폴더에 있다면 Root Directory를 그 폴더로 지정합니다.
 3. Settings → Environment Variables에 아래 표의 값을 **Production**에 입력합니다. 테스트 배포도 사용하면 Preview에도 동일하게 입력합니다. Cron 자동 호출은 Production 배포에서 동작합니다.
-4. 배포 후 `SITE_URL`을 실제 `https://프로젝트.vercel.app` 또는 연결 도메인으로 바꾸고 재배포합니다. Firebase Authentication → Settings → Authorized domains에 **프로젝트.vercel.app**과 사용할 도메인을 추가합니다. 기존 로그인 제공자 설정과 Firestore 규칙은 유지합니다.
+4. 배포 후 `SITE_URL`은 선택 사항이며 기본 대표 주소는 `https://hubstudioai.co.kr`입니다. 다른 정식 도메인을 사용할 때만 변경하고 재배포합니다. Firebase Authentication → Settings → Authorized domains에 **프로젝트.vercel.app**과 사용할 도메인을 추가합니다. 기존 로그인 제공자 설정과 Firestore 규칙은 유지합니다.
 5. `/studio`에서 기존 Firebase 계정으로 로그인 → 사진 선택 → 편집 에이전트에서 예약 설정 → 주제 확인 → 예약 활성화 → 예약 저장.
 6. Vercel의 Cron Jobs 화면과 Functions 로그에서 실행 결과를 확인합니다. 에이전트 예약 카드와 내 프로젝트에서도 초안·완료 상태를 볼 수 있습니다. 설정만 하고 예약을 저장하지 않으면 기사는 자동 발행되지 않습니다.
 
@@ -128,7 +128,7 @@ Cron은 비밀 키가 맞는 요청만 실행합니다. 브라우저에서 Cron 
 
 ## 구글·네이버 검색 최적화
 
-공개 목록과 상세 본문·내부 링크는 서버 HTML에 포함됩니다. 글별 canonical과 sitemap/RSS가 동일한 대표 도메인을 사용합니다. `SITE_URL`을 지정하면 우선 사용하며, 미설정 시 Vercel Production 도메인 시스템 변수를 사용합니다. 커스텀 도메인을 연결한 경우 `SITE_URL`을 그 주소로 설정하고 재배포하세요.
+공개 목록과 상세 본문·내부 링크는 서버 HTML에 포함됩니다. 글별 canonical과 sitemap/RSS가 동일한 대표 도메인을 사용합니다. `SITE_URL`이 없으면 `https://hubstudioai.co.kr`을 사용합니다. 기존 Vercel·ChatGPT 배포 주소나 예제 주소가 설정되어 있어도 정식 도메인을 사용합니다. 다른 정식 도메인으로 이전할 때는 `SITE_URL`을 변경하고 재배포하세요. www 및 기존 hubstudio3.vercel.app 요청은 같은 경로의 대표 주소로 308 리디렉션합니다.
 
 목록 2페이지 이후는 자기 페이지 주소를 canonical로 사용합니다. 분야 필터 화면은 중복 색인을 줄이기 위해 noindex/follow 처리하고, 개별 공개 콘텐츠는 색인을 허용합니다. 존재하지 않는 글이나 목록 페이지는 404이며, 일시적인 DB 오류를 삭제된 글로 처리하지 않습니다. 기사·전자책·SNS에 맞는 구조화 데이터와 공유 이미지 메타데이터를 제공합니다.
 
